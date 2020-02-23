@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   UserWidgets.associate = (models) => {
-    UserWidgets.belongsTo(models.User, {foreignKey: 'userId', as: 'user'});
+    UserWidgets.belongsTo(models.user, {foreignKey: 'userId', as: 'user'});
   };
 
   return UserWidgets;

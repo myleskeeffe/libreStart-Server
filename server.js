@@ -3,21 +3,12 @@ var app      = express();
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var logger = require('morgan');
+var apiUser = require("./app/api/user");
+var db = require("./models/")
 
-var databaseConfig = require('./config/database');
+apiUser(app, db)
+
 var router = require('./app/routes');
-
-const db = massive({
-  host: databaseConfig.host,
-  port: databaseConfig.port,
-  database: databaseConfig.database,
-  user: databaseConfig.user,
-  password: databaseConfig.password
-});
-
-app.set('db', db);
-
-
 
 app.listen(process.env.PORT || 8080);
 console.log("App listening on port 8080");
