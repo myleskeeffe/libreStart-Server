@@ -4,9 +4,11 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var logger = require('morgan');
 var apiUser = require("./app/api/user");
+var apiUserPrefs = require('./app/api/prefs');
 var db = require("./models/")
 
-apiUser(app, db)
+apiUser(app, db);
+apiUserPrefs(app, db);
 
 var router = require('./app/routes');
 
