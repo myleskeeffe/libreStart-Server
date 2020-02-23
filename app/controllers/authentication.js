@@ -1,5 +1,5 @@
 var jwt = require('jsonwebtoken');  
-var User = require('../models/user');
+var express = require('express');
 var authConfig = require('../../config/auth');
 
 function generateToken(user){
@@ -28,11 +28,13 @@ exports.login = function(req, res, next){
 }
 
 exports.register = function(req, res, next){
-
+    var fname = req.body.fname;
     var email = req.body.email;
     var password = req.body.password;
     var role = req.body.role;
-
+    var db = req.app.get('db');
+    
+    
     if(!email){
         return res.status(422).send({error: 'You must enter an email address'});
     }
@@ -40,39 +42,54 @@ exports.register = function(req, res, next){
     if(!password){
         return res.status(422).send({error: 'You must enter a password'});
     }
-
-    User.findOne({email: email}, function(err, existingUser){
-
-        if(err){
-            return next(err);
-        }
-
-        if(existingUser){
-            return res.status(422).send({error: 'That email address is already in use'});
-        }
-
-        var user = new User({
-            email: email,
-            password: password,
-            role: role
+    db.then(function(result) {
+        result.users.findOne(1, function(err, user){
+            console.log(user);
         });
-
-        user.save(function(err, user){
-
-            if(err){
-                return next(err);
-            }
-
-            var userInfo = setUserInfo(user);
-
-            res.status(201).json({
-                token: 'JWT ' + generateToken(userInfo),
-                user: userInfo
-            })
-
-        });
-
+//         result.users.find({externalUsername: email}, function(err, existingUser){
+//             if(err){
+//                 return next(err);
+//             }
+//             if(existingUser){
+//                 return res.status(422).send({error: 'That email is already in use'});
+//             }
+//             result.users.save({firstName: "mylestab"}, function(err, res){});
+//         });
     });
+
+    
+//     db.findOne({email: email}, function(err, existingUser){
+// 
+//         if(err){
+//             return next(err);
+//         }
+// 
+//         if(existingUser){
+//             return res.status(422).send({error: 'That email address is already in use'});
+//         }
+// 
+//         var user = new User({
+//             email: email,
+//             password: password,
+//             role: role
+//         });
+// 
+//         user.save(function(err, user){
+// 
+//             if(err){
+//                 return next(err);
+//             }
+// 
+//             var userInfo = setUserInfo(user);
+// 
+//             res.status(201).json({
+//                 token: 'JWT ' + generateToken(userInfo),
+//                 user: userInfo
+//             })
+// 
+//         });
+// 
+//     });
 
 }
 

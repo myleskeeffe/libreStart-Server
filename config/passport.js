@@ -11,6 +11,7 @@ var AzureStrategy = require('passport-azure-ad').BearerStrategy;
 var azureOptions =  {
   identityMetadata: "https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration",
   clientID: "7881dbcd-75f4-4a46-9cc0-ce779b177ab3",
+  validateIssuer: "false",
   loggingLevel: "info",
   passReqToCallback: false
 };
