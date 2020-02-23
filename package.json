@@ -1,0 +1,22 @@
+{
+  "name": "libreStart-server",
+  "version": "0.0.1",
+  "description": "A powerful API to host content for start pages.",
+  "license": "See LICENSE file",
+  "engines": {
+    "node": "13.x"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/myleskeeffe/libreStart-Server.git"
+  }
+}
