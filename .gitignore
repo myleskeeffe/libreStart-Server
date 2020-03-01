@@ -47,14 +47,14 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/*
-!node_modules/passport-azure-ad/
+node_modules/
+# !node_modules/passport-azure-ad/
 
-node_modules/passport-azure-ad/*
-!node_modules/passport-azure-ad/lib/
+# node_modules/passport-azure-ad/*
+# !node_modules/passport-azure-ad/lib/
 
-node_modules/passport-azure-ad/lib/*
-!node_modules/passport-azure-ad/lib/bearerstrategy.js
+# node_modules/passport-azure-ad/lib/*
+# !node_modules/passport-azure-ad/lib/bearerstrategy.js
 
 jspm_packages/
 
