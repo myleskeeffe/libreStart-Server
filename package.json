@@ -2,7 +2,7 @@
   "name": "libreStart-server",
   "version": "0.0.1",
   "description": "A powerful API to host content for start pages.",
-  "license": "See LICENSE file",
+  "license": "MIT",
   "engines": {
     "node": "13.x"
   },
