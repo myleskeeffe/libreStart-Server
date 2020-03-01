@@ -17,7 +17,7 @@ function setUserInfo(request){
 }
 
 exports.cloudSignin = function(req, res, next){
-    console.log("User Is: ", req.user);
+    //
 }
 
 exports.login = function(req, res, next){
