@@ -10,15 +10,28 @@ var AzureStrategy = require('passport-azure-ad').BearerStrategy;
 
 var azureOptions =  {
   identityMetadata: "https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration",
+  resourceURL: 'https://graph.windows.net',
   clientID: "7881dbcd-75f4-4a46-9cc0-ce779b177ab3",
-  validateIssuer: "false",
+  validateIssuer: true,
   loggingLevel: "info",
-  passReqToCallback: false
+  loggingNoPII: true,
+  issuer: "https://login.microsoftonline.com/0750ea5f-6147-4205-b8bf-23c1b0a5e183/v2.0", 
+  passReqToCallback: false,
+  audience: "7881dbcd-75f4-4a46-9cc0-ce779b177ab3"
 };
 
 var azureLogin = new AzureStrategy(azureOptions, function(token, done) {
-    done(null, {}, token);
+    
+    console.log(token.preferred_username, 'sucessfully logged in.');
+    if (!token.oid)
+        done(new Error('oid is not found in token'));
+    else {
+        done(null, token);
+    }
 });
+
+//"374566b3-8f1a-43d2-b298-a1577ee829e0", 
+
 
 // LOCAL LOGIN
 // var localOptions = {

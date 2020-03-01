@@ -6,6 +6,7 @@ var AuthenticationController = require('./controllers/authentication'),
 
 var requireAuth = passport.authenticate('oauth-bearer', {session: false});
 var requireLogin = passport.authenticate('oauth-bearer', {session: false});
+var requireOnlineSSO = passport.authenticate('oauth-bearer', {session: false});
 
 module.exports = function(app){
 
@@ -19,6 +20,11 @@ module.exports = function(app){
 
     authRoutes.post('/register', AuthenticationController.register);
     authRoutes.post('/login', requireLogin, AuthenticationController.login);
+    authRoutes.get('/sso', requireOnlineSSO);
+    authRoutes.get('/test', requireOnlineSSO, function(req, res){
+        console.log(req.user.preferred_username, "accessed the testing api route.");
+        res.redirect('/');
+    });
 
     authRoutes.get('/protected', function(req, res){
         res.send({ content: 'Success'});

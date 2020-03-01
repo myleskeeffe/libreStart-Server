@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const UserWidgets = sequelize.define('userWidgets', {
+  const userWidgets = sequelize.define('userWidgets', {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -16,9 +16,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  UserWidgets.associate = (models) => {
-    UserWidgets.belongsTo(models.user, {foreignKey: 'userId', as: 'user'});
+  userWidgets.associate = (models) => {
+    userWidgets.belongsTo(models.user, {foreignKey: 'userId', as: 'user'});
+    userWidgets.belongsTo(models.definedWidgets, {foreignKey: 'widgetType', as: 'widget'})
   };
 
-  return UserWidgets;
+  return userWidgets;
 }

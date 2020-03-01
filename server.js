@@ -5,10 +5,14 @@ var cors = require('cors');
 var logger = require('morgan');
 var apiUser = require("./app/api/user");
 var apiUserPrefs = require('./app/api/prefs');
+var apiWidgets = require('./app/api/widgetList');
+var apiUserWidgets = require('./app/api/userWidgets');
 var db = require("./models/")
 
 apiUser(app, db);
 apiUserPrefs(app, db);
+apiWidgets(app, db);
+apiUserWidgets(app, db);
 
 var router = require('./app/routes');
 
