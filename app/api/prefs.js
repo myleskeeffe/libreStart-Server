@@ -73,7 +73,7 @@ module.exports = (app, db) => {
         console.log(dateString + " | Admin override for action: Update User Prefs by: " + req.user.InternalUserId + " for user: " + req.params.id);
       }
       else {
-        res.json({error: "You do not have permission to access/update this endpoint."})
+        res.json({error: "You do not have permission to update this endpoint."})
 
       }
     }
