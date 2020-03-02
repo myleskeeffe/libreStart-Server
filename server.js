@@ -9,6 +9,17 @@ var apiWidgets = require('./app/api/widgetList');
 var apiUserWidgets = require('./app/api/userWidgets');
 var db = require("./models/")
 
+
+
+
+
+
+
+app.use(bodyParser.urlencoded({ extended: false })); // Parses urlencoded bodies
+app.use(bodyParser.json()); // Send JSON responses
+app.use(logger('dev')); // Log requests to API using morgan
+app.use(cors());
+
 apiUser(app, db);
 apiUserPrefs(app, db);
 apiWidgets(app, db);
@@ -18,10 +29,5 @@ var router = require('./app/routes');
 
 app.listen(process.env.PORT || 8080);
 console.log("App listening on port 8080");
-
-app.use(bodyParser.urlencoded({ extended: false })); // Parses urlencoded bodies
-app.use(bodyParser.json()); // Send JSON responses
-app.use(logger('dev')); // Log requests to API using morgan
-app.use(cors());
 
 router(app);

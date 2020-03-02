@@ -20,7 +20,7 @@ module.exports = function(app){
     authRoutes.get('/sso', requireOnlineSSO);
     authRoutes.get('/test', requireOnlineSSO, function(req, res){
         console.log(req.user.preferred_username, "accessed the testing api route.");
-        res.send({ content: 'Sucessfully accessed web api with user: ' + req.user.name + " " + req.user.preferred_username});
+        res.send({ content: 'Sucessfully accessed web api with user: ' + req.user.name + " " + req.user.preferred_username + " " + req.user.InternalUserId});
     });
 
 

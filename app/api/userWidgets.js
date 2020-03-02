@@ -1,31 +1,33 @@
+var passportService = require('../../config/passport');
+var passport = require('passport');
+var requireOnlineSSO = passport.authenticate('oauth-bearer', {session: false});
+
 module.exports = (app, db) => {
-    app.get( "/api/user/widgets/", (req, res) =>
+    app.get( "/api/user/widgets/", requireOnlineSSO, (req, res) =>
       (res.json({"Message": "A valid and authenticated User ID is required for this endpoint."}))
     );
 
-    app.get( "/api/user/widgets/:id", (req, res) =>
+    app.get( "/api/user/widgets/:id", requireOnlineSSO, (req, res) =>
       db.userWidgets.findAll({where: {userId: req.params.id}}).then( (result) => res.json(result))
     );
   
-    app.post("/api/user/widgets/", (req, res) => 
+    app.post("/api/user/widgets/", requireOnlineSSO, (req, res) => 
       db.userWidgets.create({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        externalUsername: req.body.externalUsername,
-        role: req.body.role,
-        tags: req.body.tags,
-        password: req.body.password
+        userId: req.body.userId,
+        widgetType: req.body.widgetType,
+        widgetData: req.body.widgetData,
+        status: req.body.status,
+        posSize: req.body.posSize
       }).then( (result) => res.json(result) )
     );
   
-    app.put( "/api/user/widgets/:id", (req, res) =>
+    app.put( "/api/user/widgets/:id", requireOnlineSSO, (req, res) =>
       db.userWidgets.update({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        externalUsername: req.body.externalUsername,
-        role: req.body.role,
-        tags: req.body.tags,
-        password: req.body.password
+        userId: req.body.userId,
+        widgetType: req.body.widgetType,
+        widgetData: req.body.widgetData,
+        status: req.body.status,
+        posSize: req.body.posSize
       },
       {
         where: {
